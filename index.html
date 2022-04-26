@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pay with Bitnob</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+        .bitnob-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color:
+                #031735;
+            color: #ffffff;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .img {
+            width: 20px;
+            background-image: url("https://res.cloudinary.com/gabbyprecious/image/upload/v1650746449/cad8exitdhnparfqyfjf.png");
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 20px;
+        }
+
+        body {
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+        }
+        .form-container div {
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .form-container input {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            width: 75%;
+
+        }
+        .input-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .button-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/gabbyprecious/inline-test-js@1.8/index.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 style="padding: 5px;">Internal Test Inline Checkout</h1>
+        <form onsubmit="getFormData(event)" class="form-container">
+            <div>
+                <div class="input-div">
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+                </div>
+                <div class="input-div">
+                    <label for="satoshis"><b>Satoshi</b></label>
+                    <input type="number" placeholder="Enter Satoshis" name="satoshis" id="satoshis" required>    
+                </div>
+                <div class="button-div">
+                    <button type="submit" id="button-pay" class="bitnob-button">
+                        <div class="img"></div>
+                        <p>Pay With Bitnob</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+
+        function setReference() {
+            let text = "";
+            let possible =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (let i = 0; i < 10; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+
+        function pay(publicKey, satoshis, customerEmail, reference) {
+            var data = {
+                publicKey: publicKey,
+                satoshis: satoshis,
+                customerEmail: customerEmail,
+                notificationEmail: 'gabbyprecious2000@gmail.com',
+                reference: reference,
+                callbackUrl: "https://webhook.site/75540088-1ce4-4dbd-963b-2aba6dfa498e",
+                successUrl: "https://google.com",
+
+            };
+            createCheckout(data);
+        }
+
+        function getFormData(e) {
+            e.preventDefault();
+            var email = document.getElementById('email').value;
+            var satoshis = document.getElementById('satoshis').value;
+            console.log(email);
+            var reference = setReference();
+
+            pay('pk.d7fc7.e722eefc8e752c3825',
+                satoshis,
+                'precious@bitnob.com',
+                reference
+            );
+        }
+        window.onmessage = function (e) {
+            if (e.data == 'paid') {
+                window.callSuccessUrl();
+            }
+        };
+    </script>
+</body>
+
+</html>
