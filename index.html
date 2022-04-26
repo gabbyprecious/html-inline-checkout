@@ -46,16 +46,19 @@
             height: 100vh;
             width: 100vw;
         }
+
         .form-container {
             display: flex;
             flex-direction: column;
             width: 400px;
         }
+
         .form-container div {
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 10px;
         }
+
         .form-container input {
             border: 1px solid black;
             border-radius: 5px;
@@ -64,6 +67,7 @@
             width: 75%;
 
         }
+
         .input-div {
             display: flex;
             justify-content: space-between;
@@ -77,7 +81,8 @@
             flex-direction: column;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/gh/gabbyprecious/inline-test-js@1.8/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gabbyprecious/inline-test-js@1.9/index.js"></script>
+    <!-- <script src="./sindex.js"></script> -->
 </head>
 
 <body>
@@ -92,7 +97,7 @@
                 </div>
                 <div class="input-div">
                     <label for="satoshis"><b>Satoshi</b></label>
-                    <input type="number" placeholder="Enter Satoshis" name="satoshis" id="satoshis" required>    
+                    <input type="number" placeholder="Enter Satoshis" name="satoshis" id="satoshis" required>
                 </div>
                 <div class="button-div">
                     <button type="submit" id="button-pay" class="bitnob-button">
@@ -127,7 +132,7 @@
                 successUrl: "https://google.com",
 
             };
-            createCheckout(data);
+            window.createCheckout(data);
         }
 
         function getFormData(e) {
@@ -143,11 +148,6 @@
                 reference
             );
         }
-        window.onmessage = function (e) {
-            if (e.data == 'paid') {
-                window.callSuccessUrl();
-            }
-        };
     </script>
 </body>
 
