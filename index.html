@@ -82,14 +82,14 @@
             flex-direction: column;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/gh/gabbyprecious/inline-test-js@2.3/index.js"></script>
+    <script src="https://www.js.bitnob.co/v1/inline.js"></script>
     <!-- <script src="./sindex.js"></script> -->
 </head>
 
 <body>
 
     <div class="container">
-        <h1 style="padding: 5px;">Internal Test Inline Checkout</h1>
+        <h1 style="padding: 5px;">Pay With Bitnob</h1>
         <form onsubmit="getFormData(event)" class="form-container">
             <div>
                 <div class="input-div">
@@ -97,8 +97,8 @@
                     <input type="text" placeholder="Enter Email" name="email" id="email" required>
                 </div>
                 <div class="input-div">
-                    <label for="satoshis"><b>Satoshi</b></label>
-                    <input type="number" placeholder="Enter Satoshis" name="satoshis" id="satoshis" required>
+                    <label for="amount"><b>Amount</b></label>
+                    <input type="number" placeholder="Enter amount in Naira" name="satoshis" id="satoshis" required>
                 </div>
                 <div class="button-div">
                     <button type="submit" id="button-pay" class="bitnob-button">
@@ -110,7 +110,6 @@
         </form>
     </div>
     <script>
-
         function setReference() {
             let text = "";
             let possible =
@@ -122,30 +121,30 @@
             return text;
         }
 
-        function pay(publicKey, satoshis, customerEmail, reference) {
+        function pay(publicKey, amount, customerEmail, reference) {
             var data = {
                 publicKey: publicKey,
-                satoshis: satoshis,
+                amount: amount,
                 customerEmail: customerEmail,
                 notificationEmail: 'gabbyprecious2000@gmail.com',
+                description: "pay me my money",
+                currency: "NGN",
                 reference: reference,
                 callbackUrl: "https://webhook.site/75540088-1ce4-4dbd-963b-2aba6dfa498e",
                 successUrl: "https://google.com",
 
             };
-            window.createCheckout(data);
+            window.initializePayment(data, "sandbox");
         }
 
         function getFormData(e) {
             e.preventDefault();
             var email = document.getElementById('email').value;
-            var satoshis = document.getElementById('satoshis').value;
-            console.log(email);
+            var amount = document.getElementById('satoshis').value;
             var reference = setReference();
-
-            pay('pk.d7fc7.e722eefc8e752c3825',
-                satoshis,
-                'precious@bitnob.com',
+            pay('pk.9058f.0a5cb70de0f5853b9febfa',
+                amount,
+                email,
                 reference
             );
         }
