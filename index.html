@@ -5,7 +5,7 @@
     <title>Pay with Bitnob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
 
         .bitnob-button {
             display: flex;
@@ -21,15 +21,6 @@
             font-family: 'Quicksand', sans-serif;
         }
 
-        .img {
-            width: 20px;
-            background-image: url("https://res.cloudinary.com/gabbyprecious/image/upload/v1650746449/cad8exitdhnparfqyfjf.png");
-            background-position: center;
-            background-size: contain;
-            background-repeat: no-repeat;
-            height: 20px;
-        }
-
         body {
             overflow-x: hidden;
             width: 100%;
@@ -37,6 +28,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
         }
 
         .container {
@@ -81,6 +73,19 @@
             align-items: center;
             flex-direction: column;
         }
+
+        input {
+            box-sizing: border-box;
+
+            background: #FFFFFF;
+            border: 1px solid rgba(153, 163, 160, 0.6);
+            border-radius: 16px;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 900;
+        }
     </style>
     <script src="https://www.js.bitnob.co/v1/inline.js"></script>
     <!-- <script src="./sindex.js"></script> -->
@@ -98,12 +103,11 @@
                 </div>
                 <div class="input-div">
                     <label for="amount"><b>Amount</b></label>
-                    <input type="number" placeholder="Enter amount in Naira" name="satoshis" id="satoshis" required>
+                    <input type="number" placeholder="Enter amount in Naira" name="amount" id="amount" required>
                 </div>
                 <div class="button-div">
                     <button type="submit" id="button-pay" class="bitnob-button">
-                        <div class="img"></div>
-                        <p>Pay With Bitnob</p>
+                        <p class"text">Pay With Bitnob</p>
                     </button>
                 </div>
             </div>
@@ -140,7 +144,7 @@
         function getFormData(e) {
             e.preventDefault();
             var email = document.getElementById('email').value;
-            var amount = document.getElementById('satoshis').value;
+            var amount = document.getElementById('amount').value;
             var reference = setReference();
             pay('pk.9058f.0a5cb70de0f5853b9febfa',
                 amount,
